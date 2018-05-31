@@ -1,0 +1,27 @@
+body{
+    color: white;
+}
+
+.link{
+    color: rgb(245, 156, 83);
+}
+
+
+.fashion{
+    border-radius: 10px;
+    font-size: 2em;
+}
+
+.view{
+    background-color: rgb(89, 133, 199);
+    color: white;
+    border-radius: 10px;
+    font-size: 1.4em;
+    line-height: 200%;
+}
+h1{
+    font-family: 'Poppins', sans-serif;
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+}
