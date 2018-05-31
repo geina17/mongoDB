@@ -1,0 +1,87 @@
+{{!-- templating for all articles --}} 
+{{!-- iterate over all the aricles --}}
+ {{#each articles}}
+<ul class="collapsible" data-collapsible="accordion">
+    {{!-- article drop down --}}
+    <li>
+        <div style="background-colo:white;" class="collapsible-header grey lighten-2">
+            <i class="material-icons">language</i>
+            <b>{{updated}}</b>
+            <div style="clear:left; line-height:110%; padding-bottom:10px;">
+                <b>{{title}}</b>
+            </div>
+        </div>
+        <div class="collapsible-body" style="background-color:white;">
+            <p>
+                {{summary}}
+                <br>
+                <br>
+                <i>please read the full article
+                    <a href="{{link}}" target="_new">here</a>.</i>
+            </p>
+        </div>
+    </li>
+    {{!-- add comments drop dwn --}}
+    <li>
+        <div class="collapsible-header">
+            <i class="material-icons">comment</i>add a comment</div>
+        <div class="collapsible-body" style="background-color:white;">
+            <form id="form-add-{{_id}}" action="add/comment/{{_id}}" method="post" style="background-color:white;">
+                {{!-- author name --}}
+                <div class="row">
+                    <div class="input-field col s2"></div>
+                    <div class="input-field col s8">
+                        <input id="author_name" name="name" type="text" class="validate">
+                        <label for="author_name">Your name:</label>
+                    </div>
+                </div>
+                {{!-- comment input --}}
+                <div class="row">
+                    <div class="input-field col s2"></div>
+                    <div class="input-field col s8">
+                        <textarea id="comment_box" name="comment" class="materialize-textarea"></textarea>
+                        <label for="comment_box">Your Reaction</label>
+                    </div>
+                </div>
+                {{!-- submit bttn --}}
+                <div class="row">
+                    <div class="input-field col s2"></div>
+                    <div class="input-field col s8">
+                        <center>
+                            <input class="btn add-comment-button" data-id="{{_id}}" value="Submit">
+                        </center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </li>
+    {{!-- view comments drop dwn --}}
+    <li>
+        <div class="collapsible-header">
+            <i class="material-icons">thumbs_up_down</i>view comments</div>
+        <div class="collapsible-body" style="background-color:white;">
+            {{!-- check if the article has comments --}} 
+            {{#if comments}}
+            {{!-- articles has comments so iterate over them --}}
+            <ul class="collection">
+                {{#each comments}}
+                <li class="collection-item">
+                    {{!-- add author name --}}
+                    <b>{{author}}</b>
+                    {{!-- add delet btn --}}
+                    <span class="badge">
+                        <form id="form-delete-{{_id}}" action="remove/comment/{{_id}}" method="POST">
+                            <input class="btn-small delete-comment-button" data-id="{{_id}}" type="submit" value="delete" style="color:white;background-color: red; border-color: red;">
+                        </form>
+                    </span>
+                    <br> {{!-- add content of the comments --}} {{content}}
+                </li>
+                {{/each}}
+            </ul>
+            {{!-- no comments/display message --}} {{else}}
+            <p>no comment yet</p>
+            {{/if}}
+        </div>
+    </li>
+</ul>
+{{/each}}
